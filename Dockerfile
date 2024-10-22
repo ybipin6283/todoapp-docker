@@ -13,13 +13,13 @@ COPY package*.json ./
 RUN npm install
 
 # copy everthing on working direcotry
-COPY ..
+COPY . .
 
 # build the application source code
 RUN npm run build
 
 # run the application 
-FROM nginx: latest AS deployer
+FROM nginx:latest AS deployer
 
 # everthing will copy on this perticular direcotry
-COPY --from=installer app/build /app/build/usr/share/nginx/html
+COPY --from=installer app/build /usr/share/nginx/html
